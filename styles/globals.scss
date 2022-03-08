@@ -1,0 +1,38 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Cantarell;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p a {
+  text-decoration: underline;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+/* Define fonts */
+@font-face {
+  font-family: Cantarell;
+  src: url("../fonts/Cantarell-Regular.ttf");
+}
+
+@font-face {
+  font-family: NotoSans-Bold;
+  src: url("../fonts/NotoSans-Bold.ttf");
+}
