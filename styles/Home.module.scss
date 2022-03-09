@@ -1,4 +1,4 @@
-@import "./colors.scss";
+@import "./constants.scss";
 
 .button_row {
   display: flex;
@@ -12,7 +12,7 @@
     margin: 1rem;
     padding: 1.5rem;
     cursor: pointer;
-    transition: 120ms;
+    transition: $transition-medium;
 
     &:hover {
       border: 1px solid transparent;
@@ -50,7 +50,18 @@
     color: #ffffff;
 
     h1 .my_name {
-      color: $color-primary-on-dark;
+      color: $color-primary;
+    }
+
+    .scroll_hint {
+      position: absolute;
+      bottom: 5%;
+      transition: $transition-medium;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 
@@ -110,11 +121,11 @@
         cursor: pointer;
 
         &:nth-child(1) {
-          background: linear-gradient(160deg, #fff5f5, #f5f5f5);
+          background: linear-gradient(165deg, #ffe0e0, #f0f0f0);
         }
 
         &:nth-child(2) {
-          background: linear-gradient(160deg, #f5f5ff, #f5f5f5);
+          background: linear-gradient(160deg, #e0e0ff, #f0f0f0);
         }
 
         &:hover {

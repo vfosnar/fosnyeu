@@ -1,13 +1,23 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import Typewriter from 'typewriter-effect';
-import styles from '../styles/Home.module.scss';
-import school_logo from '../public/school_logo.png';
 import Link from 'next/link';
+import Typewriter from 'typewriter-effect';
+import school_logo from '../public/school_logo.png';
+import styles from '../styles/Home.module.scss';
 
-const CONTACT_LOGO_SIZE = "120rem";
-const SCHOOL_LOGO_SIZE = "250rem";
+const SCROLL_HINT_SIZE = "80rem";
+const CONTACT_LOGO_SIZE = "80rem";
+const SCHOOL_LOGO_SIZE = "230rem";
+
+const scrollToContent = () => {
+ const contentStart = document.getElementById("content-start");
+
+ contentStart!.scrollIntoView({
+   behavior: 'smooth',
+   block: 'start'
+ });
+}
 
 const Home: NextPage = () => {
   return (
@@ -32,12 +42,15 @@ const Home: NextPage = () => {
             } )}>
         </Typewriter>
         </h1>
+        <div className={styles.scroll_hint}>
+          <Image width={SCROLL_HINT_SIZE} height={SCROLL_HINT_SIZE} src="/scroll_hint.svg" priority alt="Scroll hint" onClick={scrollToContent} />
+        </div>
       </header>
 
-      <section className={styles.contacts}>
+      <section id="content-start" className={styles.contacts}>
         <h1>Contacts</h1>
         <div className={styles.button_row}>
-          <a href="https://matrix.to/#/@vfosnar:matrix.org">
+          <a href="https://matrix.to/#/@vfosnar:matrix.fosny.eu">
             <Image height={CONTACT_LOGO_SIZE} width={CONTACT_LOGO_SIZE} src="/logos/matrix.svg" alt="Matrix logo" />
             <h2>Matrix</h2>
           </a>
@@ -55,7 +68,7 @@ const Home: NextPage = () => {
       <section className={styles.about_me}>
         <h1>Something About Me</h1>
         <div className={styles.row}>
-          <p>I am an IT student at <Link href="https://www.spse.cz">School of Electrical Engineering</Link> in Pardubice with specialization on software development and web design. I am commited to writing code that is licensed only under FOSS license.</p>
+          <p>I am an IT student at <Link href="https://www.spse.cz">School of Electrical Engineering</Link> in Pardubice with specialization on software development and web design. I am commited to writing code that is licensed only under <a href="https://choosealicense.com/">FOSS license</a>.</p>
           <Image src={school_logo} height={SCHOOL_LOGO_SIZE} width={SCHOOL_LOGO_SIZE} layout="fixed" alt="School logo" />
         </div>
       </section>
