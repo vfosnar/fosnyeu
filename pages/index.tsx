@@ -74,7 +74,7 @@ const Home: NextPage = () => {
       </section>
 
       <section className={styles.projects}>
-        <h1>My Projects</h1>
+        <h1>Public Projects</h1>
         <div className={styles.row}>
           <a href="https://git.fosny.eu/vfosnar/NumberDocker">
             <h2>Number</h2>
