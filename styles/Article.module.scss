@@ -1,0 +1,79 @@
+@import "./constants.scss";
+
+.container {
+    > * {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        > * {
+            width: 100%;
+            max-width: 1000px;
+        }
+    }
+
+    header {
+        background-color: black;
+        color: #ffffff;
+        font-size: 1.7rem;
+
+        nav {
+            display: flex;
+            flex-direction: row;
+
+            > * {
+                margin: 1rem;
+
+                &:hover {
+                    color: #ffffffa0;
+                }
+            }
+        }
+    }
+
+    main {
+        padding: 0rem 5%;
+    }
+}
+
+$md-code-background: #f0f0f0;
+
+.content {
+    margin: 1rem 0;
+    line-height: 1.6rem;
+
+    code {
+        background-color: $md-code-background;
+        padding: 0.2rem;
+        border-radius: 0.2rem;
+    }
+
+    pre {
+        padding: 0.7rem 0;
+        width: 100%;
+        overflow-x: auto;
+
+        background-color: $md-code-background;
+        border-radius: 0.3rem;
+        scrollbar-color: $color-primary #00000012;
+
+        code {
+            background-color: initial;
+            padding: initial;
+            border-radius: initial;
+            margin: 0 0.7rem;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
+
+.error {
+    text-align: center;
+}
