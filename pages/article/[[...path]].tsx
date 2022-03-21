@@ -1,3 +1,5 @@
+import { existsSync } from 'fs';
+import { readFile } from 'fs/promises';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -52,11 +54,6 @@ const CommonLayout = ( props: {
 
 export const getServerSideProps: GetServerSideProps = async ( context ) => {
 
-    // Check if server is set up
-    if ( process.env.ARTICLES_REPO_SERVER === undefined || process.env.ARTICLES_REPO_OWNER === undefined || process.env.ARTICLES_REPO_NAME === undefined ) {
-        return { notFound: true };
-    }
-
     const { path } = context.query as { path: string[] };
     const repositoryPath = path.join( '/' ).toLowerCase();
 
@@ -65,18 +62,22 @@ export const getServerSideProps: GetServerSideProps = async ( context ) => {
         return { notFound: true };
     }
 
-    // Make request to the git repository server
-    const authorization = process.env.ARTICLES_REPO_TOKEN === undefined ? '' : `?token=${process.env.ARTICLES_REPO_TOKEN}`;
-    const url = `${process.env.ARTICLES_REPO_SERVER}/api/v1/repos/${process.env.ARTICLES_REPO_OWNER}/${process.env.ARTICLES_REPO_NAME}/raw/${repositoryPath}.md${authorization}`;
-    const res = await fetch( url );
+    // Check if server is set up
+    let markdown: string | undefined = undefined;
 
-    // Check response status
-    if ( res.status !== 200 ) {
+    if ( markdown === undefined && process.env.ARTICLES_LOCAL_PATH !== undefined ) {
+        markdown = await readLocalFile( repositoryPath );
+    }
+
+    if ( markdown === undefined && process.env.ARTICLES_REPO_SERVER !== undefined && process.env.ARTICLES_REPO_OWNER !== undefined && process.env.ARTICLES_REPO_NAME !== undefined ) {
+        markdown = await readGiteaFile( repositoryPath );
+    }
+
+    if ( markdown === undefined ) {
         return { notFound: true };
     }
 
-    // Generate HTML
-    const markdown = await res.text();
+    // Rended HTML
     const html = await processor.process( markdown );
 
     // Return successful response
@@ -85,6 +86,35 @@ export const getServerSideProps: GetServerSideProps = async ( context ) => {
             html: html.toString()
         }
     };
+};
+
+const readGiteaFile = async ( repositoryPath: string ) => {
+
+    // Make request to the git repository server
+    const authorization = process.env.ARTICLES_REPO_TOKEN === undefined ? '' : `?token=${process.env.ARTICLES_REPO_TOKEN}`;
+    const url = `${process.env.ARTICLES_REPO_SERVER}/api/v1/repos/${process.env.ARTICLES_REPO_OWNER}/${process.env.ARTICLES_REPO_NAME}/raw/${repositoryPath}.md${authorization}`;
+    const res = await fetch( url );
+
+    // Check response status
+    if ( res.status !== 200 ) {
+        return undefined;
+    }
+
+    // Generate HTML
+    return await res.text();
+};
+
+const readLocalFile = async( path: string ) => {
+
+    const filePath = `${process.env.ARTICLES_LOCAL_PATH}/${path}.md`;
+
+    if ( !existsSync( filePath ) ) {
+        return undefined;
+    }
+
+    return await readFile( filePath, {
+        encoding: 'utf-8'
+    } );
 };
 
 export default Article;

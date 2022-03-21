@@ -40,7 +40,7 @@ $md-code-background: #f0f0f0;
 
 .content {
     margin: 1rem 0;
-    line-height: 1.6rem;
+    line-height: 1.9rem;
 
     code {
         background-color: $md-code-background;
@@ -49,7 +49,7 @@ $md-code-background: #f0f0f0;
     }
 
     pre {
-        padding: 0.7rem 0;
+        padding: 0.7rem;
         width: 100%;
         overflow-x: auto;
 
@@ -61,7 +61,7 @@ $md-code-background: #f0f0f0;
             background-color: initial;
             padding: initial;
             border-radius: initial;
-            margin: 0 0.7rem;
+            margin: 0;
         }
     }
 
@@ -71,6 +71,10 @@ $md-code-background: #f0f0f0;
         &:hover {
             color: $color-primary;
         }
+    }
+
+    img {
+        max-width: 100%;
     }
 }
 
