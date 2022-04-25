@@ -46,11 +46,11 @@ const Home: NextPage = () => {
             <section id="content-start" className={styles.contacts}>
                 <h1>Contacts</h1>
                 <div className={styles.button_row}>
-                    <a href="https://matrix.to/#/@vfosnar:matrix.fosny.eu">
+                    <a href="https://matrix.to/#/@vfosnar:fosny.eu">
                         <Image height={CONTACT_LOGO_SIZE} width={CONTACT_LOGO_SIZE} src="/logos/matrix.svg" alt="Matrix logo" />
                         <h2>Matrix</h2>
                     </a>
-                    <a href="mailto:v.fosnar@protonmail.com">
+                    <a href="mailto:v.fosnar@proton.me">
                         <Image height={CONTACT_LOGO_SIZE} width={CONTACT_LOGO_SIZE} src="/logos/protonmail.svg" alt="ProtonMail logo" />
                         <h2>Email</h2>
                     </a>
