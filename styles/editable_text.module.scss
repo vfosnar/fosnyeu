@@ -1,0 +1,21 @@
+@import "./constants.scss";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.edit {
+    cursor: pointer;
+}
+
+.input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $color-primary;
+
+    &:focus {
+        outline: none;
+    }
+}

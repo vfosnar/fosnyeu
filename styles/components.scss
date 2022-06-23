@@ -1,0 +1,41 @@
+
+@mixin text_input {
+    padding: 0.2rem;
+
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+
+    &:focus {
+        outline: none;
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        border-color: #000;
+        color: #000;
+    }
+}
+
+@mixin button {
+    padding: 0.5rem;
+
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    transition: $timing-fast;
+
+    &:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+    @media screen and (prefers-color-scheme: light) {
+        color: #000;
+
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    }
+}

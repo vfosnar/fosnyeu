@@ -1,10 +1,22 @@
-@import "./constants.scss";
 
-html,
+/* Fonts */
+@font-face {
+  font-family: FiraCode;
+  src: url("../fonts/FiraCode.ttf");
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  padding: 0;
   margin: 0;
-  font-family: Cantarell;
+
+  padding: 0;
+
+  font-family: FiraCode;
+  font-size: 20px;
 }
 
 a {
@@ -12,33 +24,6 @@ a {
   text-decoration: none;
 }
 
-p a {
-  text-decoration: underline;
-
-  &:hover {
-    color: $color-primary;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
-
-/* Define fonts */
-@font-face {
-  font-family: Cantarell;
-  src: url("../fonts/Cantarell-Regular.ttf");
-}
-
-@font-face {
-  font-family: NotoSans-Bold;
-  src: url("../fonts/NotoSans-Bold.ttf");
+input {
+  color: inherit;
 }

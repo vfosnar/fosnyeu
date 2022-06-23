@@ -1,0 +1,19 @@
+@import "./components.scss";
+@import "./constants.scss";
+
+.message {
+    color: $color-primary;
+}
+
+.label {
+    font-size: 0.7em;
+}
+
+.entry {
+    font-size: 1.6em;
+    padding-bottom: 1rem;
+}
+
+.logout {
+    @include button;
+}

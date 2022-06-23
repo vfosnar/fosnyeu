@@ -1,0 +1,28 @@
+@import "./constants.scss";
+
+.container {
+    margin: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (max-width: 700px) {
+        margin: 1rem;
+    }
+}
+
+.content {
+    width: 100%;
+    max-width: 1200px;
+
+    a {
+        color: $color-primary;
+        text-decoration: underline;
+    }
+
+    h2,
+    h3 {
+        padding-top: 2.5rem;
+    }
+}

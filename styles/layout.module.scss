@@ -1,0 +1,83 @@
+@import "./constants.scss";
+
+.container {
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: $bp-phone) {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+}
+
+.menu {
+    height: 100vh;
+    width: 15rem;
+    position: sticky;
+    top: 0;
+
+    background-color: #131317;
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+
+    .pfp_container {
+        width: 100%;
+
+        .pfp {
+            width: 100%;
+        }
+
+        @media screen and (max-width: $bp-phone) {
+            display: none;
+        }
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        border: 3px double $color-primary;
+
+        a {
+            padding: 0.7rem 1rem;
+
+            &:hover {
+                background-color: $color-primary;
+            }
+
+            @media screen and (max-width: $bp-phone) {
+                padding: 1rem;
+            }
+        }
+
+        @media screen and (max-width: $bp-phone) {
+            border: none;
+        }
+    }
+
+    @media screen and (max-width: $bp-phone) {
+        height: auto;
+        width: 100%;
+        position: relative;
+    }
+}
+
+.content {
+    flex: 1;
+    min-height: 100vh;
+    overflow: auto;
+
+    background-color: #1c1d22;
+    color: #fff;
+    @media screen and (prefers-color-scheme: light) {
+        background-color: #fff;
+        color: #000;
+    }
+
+    @media screen and (max-width: $bp-phone) {
+        min-height: initial;
+    }
+}
