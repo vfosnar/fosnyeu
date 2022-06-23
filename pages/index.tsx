@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     return (
         <TextContainer>
             <Head>
-                <link rel="canonical" href="https://fosny.eu/" />
+                <link rel="canonical" href="https://www.fosny.eu" />
             </Head>
             <h1>
                 <Typewriter
