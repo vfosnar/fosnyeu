@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import Typewriter from 'typewriter-effect';
 import TextContainer from '../components/TextContainer';
@@ -6,6 +7,9 @@ import TextContainer from '../components/TextContainer';
 const Home: NextPage = () => {
     return (
         <TextContainer>
+            <Head>
+                <link rel="canonical" href="https://fosny.eu/" />
+            </Head>
             <h1>
                 <Typewriter
                     onInit={typewriter => {
