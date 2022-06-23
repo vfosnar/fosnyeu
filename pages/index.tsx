@@ -17,7 +17,7 @@ const Home: NextPage = () => {
                             .start();
                     }} />
             </h1>
-            <p>Hi! I&apos;m a <Link href="https://www.spse.cz/">high school</Link> student from the Czech Republic. I&apos;m interested in programming, reverse-engineering and love open-source. You can find some of my projects on <Link href="https://git.fosny.eu/">this</Link> self-hosted git server or my <Link href="https://github.com/vfosnar">GitHub profile</Link>.</p>
+            <p>Hi! My name is Vojtěch Fošnár, I&apos;m a <Link href="https://www.spse.cz/">high school</Link> student from the Czech Republic. I&apos;m interested in programming, reverse-engineering and love open-source. You can find some of my projects on <Link href="https://git.fosny.eu/">this</Link> self-hosted git server or my <Link href="https://github.com/vfosnar">GitHub profile</Link>.</p>
             <p>If you landed on this page because one of my projects, you can consider <Link href="/donate">supporting</Link> my work.</p>
             <h2>Contact me</h2>
             <p>Feel free to contact me if you need anything, want to discuss something, or just want to talk. The preffered way would be through the <Link href="https://matrix.to/#/@vfosnar:fosny.eu">Matrix</Link>, but I also have an <Link href="mailto:vfosnar@fosny.eu">E-mail</Link>. You can also follow me on <Link href="https://c.im/@vfosnar" passHref={true}><a rel="me">Mastodon</a></Link>.</p>
