@@ -12,10 +12,10 @@ const Layout = (props: {
             <Head>
                 <link rel="icon" href="/pfp.svg" />
                 <title>Fosny.eu - Vojtěch Fošnár</title>
-                <meta name="description" content="My personal homepage. I'm a high school student from the Czech Republic. I'm interested in programming, reverse-engineering and love open-source." />
+                <meta name="description" content="My personal homepage. I'm a high school student from the Czech Republic. I'm interested in programming, reverse engineering and love open source." />
                 <meta property="og:title" content="Fosny.eu" />
                 <meta property="og:type" content="website" />
-                <meta name="og:description" content="My personal homepage. I'm a high school student from the Czech Republic. I'm interested in programming, reverse-engineering and love open-source." />
+                <meta name="og:description" content="My personal homepage. I'm a high school student from the Czech Republic. I'm interested in programming, reverse engineering and love open source." />
             </Head>
             <div className={styles.menu}>
                 <div className={styles.pfp_container}>

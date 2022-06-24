@@ -40,10 +40,13 @@ const Home: NextPage = () => {
 
     const updateEmail = async (email: string) => {
         // Send request to the server
-        // TODO: Display error message if the request fails
-        await updateProperty('email', {
-            email: email
-        });
+        try {
+            await updateProperty('email', {
+                email: email
+            });
+        } catch (err) {
+            return setMessage('Failed to change the email');
+        }
 
         // Update the user locally
         let newUser = Object.assign({}, user);
@@ -51,7 +54,7 @@ const Home: NextPage = () => {
         setUser(newUser);
 
         // Show a message
-        setMessage('Email updated successfully!');
+        setMessage('Email updated successfully');
     };
 
     const updatePassword = async (password: string) => {
@@ -61,16 +64,18 @@ const Home: NextPage = () => {
         }
 
         // Send request to the server
-        // TODO: Display error message if the request fails
-        await updateProperty('password', {
-            password: password
-        });
+        try {
+            await updateProperty('password', {
+                password: password
+            });
+        } catch (err) {
+            return setMessage('Failed to change the password');
+        }
 
         // Show a message
-        setMessage('Password updated successfully!');
+        setMessage('Password updated successfully');
     };
 
-    /*
     const updateProfilePicture = async (file: File) => {
 
         // Read the file
@@ -84,15 +89,22 @@ const Home: NextPage = () => {
         };
 
         // Send request to the server
-        const res = await axios.post('/api/updateProfilePicture', formData, config);
-        console.log(res);
+        try {
+            await axios.post('/api/updateProfilePicture', formData, config);
+        } catch (err) {
+            return setMessage('Failed to change the image');
+        }
+
+        setMessage('Image changed successfully');
     };
-    */
 
     const logout = async () => {
         // Send request to the server
-        // TODO: Display error message if the request fails
-        await axios.post('/api/logout');
+        try {
+            await axios.post('/api/logout');
+        } catch (err) {
+            return setMessage('Logout failed');
+        }
 
         // Redirect to the login page
         router.push('/login');
@@ -118,7 +130,8 @@ const Home: NextPage = () => {
                 </>
             )}
             <br />
-            {/*<input type="file" onChange={event => event.target.files && updateProfilePicture(event.target.files[0])} />*/}
+            <input type="file" onChange={event => event.target.files && updateProfilePicture(event.target.files[0])} />
+            <br />
             <button className={styles.logout} onClick={logout}>Logout</button>
         </TextContainer>
     );
