@@ -1,112 +1,69 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { User } from '../lib/ldap';
 import { useRouter } from 'next/router';
 import TextContainer from '../components/TextContainer';
 import EditableText from '../components/EditableText';
 import styles from '../styles/manage.module.scss';
 import Image from 'next/image';
+import useUser from '../hooks/useUser';
 
 const Home: NextPage = () => {
     const router = useRouter();
-    const [user, setUser] = useState<User | null>(null);
+    const { user, logout, setEmail, setPassword, setProfilePicture } = useUser();
     const [message, setMessage] = useState('');
 
+    // Check if user is logged in,
+    // otherwise redirect to the login page
     useEffect(() => {
-        (async () => {
-            // Make request to the server
-            try {
-                const res = await axios.post('/api/user', undefined, {
-                    validateStatus: status => status === 200 || status === 401
-                });
-                if (res.status === 401) return router.push('/login');
-                else setUser(res.data);
-            } catch (err: any) {
-                if(err.message) setMessage(err.message);
-                else setMessage('Unknown error occurred');
-            }
-        })();
-    }, [router]);
+        if(!user) router.push('/login');
+    }, [router, user]);
+    if(!user) return null;
 
-    if(user === null) return <div>Loading...</div>;
+    const onSetEmail = async (email: string) => {
 
-    const updateProperty = async (attribute: string, data: Record<string, string>) => {
-        await axios.post('/api/updateProperty', {
-            attribute: attribute,
-            ...data
-        });
-    };
-
-    const updateEmail = async (email: string) => {
-        // Send request to the server
         try {
-            await updateProperty('email', {
-                email: email
-            });
-        } catch (err) {
+            await setEmail(email);
+        } catch {
             return setMessage('Failed to change the email');
         }
 
-        // Update the user locally
-        let newUser = Object.assign({}, user);
-        newUser.email = email;
-        setUser(newUser);
-
-        // Show a message
         setMessage('Email updated successfully');
     };
 
-    const updatePassword = async (password: string) => {
+    const onSetPassword = async (password: string) => {
 
-        if(password.length === 0) {
+        if(password.length === 0)
             return setMessage('Password cannot be empty!');
-        }
 
-        // Send request to the server
         try {
-            await updateProperty('password', {
-                password: password
-            });
-        } catch (err) {
+            await setPassword(password);
+        } catch {
             return setMessage('Failed to change the password');
         }
 
-        // Show a message
         setMessage('Password updated successfully');
     };
 
-    const updateProfilePicture = async (file: File) => {
+    const onSetProfilePicture = async (file: File)  => {
 
-        // Read the file
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileName', file.name);
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data',
-            },
-        };
-
-        // Send request to the server
         try {
-            await axios.post('/api/updateProfilePicture', formData, config);
-        } catch (err) {
+            await setProfilePicture(file);
+        } catch {
             return setMessage('Failed to change the image');
         }
 
         setMessage('Image changed successfully');
     };
 
-    const logout = async () => {
-        // Send request to the server
+    const onLogout = async () => {
+
         try {
-            await axios.post('/api/logout');
-        } catch (err) {
+            await logout();
+        } catch
+        {
             return setMessage('Logout failed');
         }
 
-        // Redirect to the login page
         router.push('/login');
     };
 
@@ -119,9 +76,9 @@ const Home: NextPage = () => {
             <label className={styles.label}>Surname:</label>
             <div className={styles.entry}>{user.surname}</div>
             <label className={styles.label}>E-Mail:</label>
-            <div className={styles.entry}><EditableText onSubmit={updateEmail} type="email" defaultText={user.email || ''} /></div>
+            <div className={styles.entry}><EditableText onSubmit={onSetEmail} type="email" defaultText={user.email || ''} /></div>
             <label className={styles.label}>Password:</label>
-            <div className={styles.entry}><EditableText onSubmit={updatePassword} type="password" defaultText={''} hidden={true} /></div>
+            <div className={styles.entry}><EditableText onSubmit={onSetPassword} type="password" defaultText={''} hidden={true} /></div>
             <label className={styles.label}>Profile Picture:</label>
             {user.profilePicture && (
                 <>
@@ -130,9 +87,9 @@ const Home: NextPage = () => {
                 </>
             )}
             <br />
-            <input type="file" onChange={event => event.target.files && updateProfilePicture(event.target.files[0])} />
+            <input type="file" onChange={event => event.target.files && onSetProfilePicture(event.target.files[0])} />
             <br />
-            <button className={styles.logout} onClick={logout}>Logout</button>
+            <button className={styles.logout} onClick={onLogout}>Logout</button>
         </TextContainer>
     );
 };

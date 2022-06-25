@@ -20,9 +20,10 @@
     padding: 0.5rem;
 
     background-color: transparent;
-    color: #fff;
     border: 0;
+    color: #fff;
     cursor: pointer;
+    text-decoration: underline;
     transition: $timing-fast;
 
     &:hover {

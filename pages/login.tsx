@@ -1,52 +1,53 @@
 import type { NextPage } from 'next';
 import { FormEvent, useState } from 'react';
 import styles from '../styles/login.module.scss';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+import useUser from '../hooks/useUser';
+import { useEffect } from 'react';
 
 const Home: NextPage = () => {
     const router = useRouter();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const { user, login } = useUser();
     const [errorMessage, setErrorMessage] = useState<string>('');
+
+    // Redirect to account management page
+    // when user is already logged in
+    useEffect(() => {
+        if(user) router.push('/manage');
+    }, [router, user]);
 
     /**
      * Handle the authentication request
      * @param event
      * @returns
      */
-    const login = async (event: FormEvent) => {
+    const onLogin = async (event: FormEvent) => {
         event.preventDefault();
         event.stopPropagation();
 
-        let res;
+        // This is anti-pattern, but it solves the autofill problem
+        const username = (document.getElementById('username') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+
+        let success;
         try {
-            res = await axios.post('/api/login', {
-                username: username,
-                password: password
-            }, {
-                validateStatus: status => status === 200 || status === 401
-            });
-
-            if (res.status !== 200) {
-                setErrorMessage('Invalid credentials');
-                return;
-            }
-
-            router.push('/manage');
-        } catch(err: any) {
-            if(err.message) setErrorMessage(err.message);
-            else setErrorMessage('Unknown error occurred');
+            success = await login(username, password);
+        } catch {
+            setErrorMessage('Unknown error occured');
+            return;
         }
+
+        if (success) router.push('/manage');
+        else setErrorMessage('Invalid credentials');
     };
 
     return (
-        <div className={styles.container} onSubmit={login}>
+        <div className={styles.container} onSubmit={onLogin}>
             <form className={styles.form}>
                 <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" onChange={event => setUsername(event.target.value)} />
+                <input type="text" id="username" name="username" />
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" onChange={event => setPassword(event.target.value)} />
+                <input type="password" id="password" name="password" />
                 <span className={styles.error}>{errorMessage}</span>
                 <input type="submit" value="Login" />
             </form>

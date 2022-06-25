@@ -3,10 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/layout.module.scss';
 import pfp from '../public/pfp.svg';
+import useUser from '../hooks/useUser';
 
 const Layout = (props: {
     children: any
 }) => {
+    const { user } = useUser();
+
+    const picture = user?.profilePicture ? (
+        `data:image/png;base64,${user.profilePicture}`
+    ) : pfp;
+
     return (
         <div className={styles.container}>
             <Head>
@@ -19,7 +26,7 @@ const Layout = (props: {
             </Head>
             <div className={styles.menu}>
                 <div className={styles.pfp_container}>
-                    <Image className={styles.pfp} src={pfp} alt='Profile picture' priority />
+                    <Image width="100%" height="100%" layout="responsive" objectFit="contain" src={picture} alt='Profile picture' priority />
                 </div>
                 <nav>
                     <Link href="/">Home</Link>

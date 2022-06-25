@@ -1,6 +1,21 @@
 @import "./components.scss";
 @import "./constants.scss";
 
+/* Loading page */
+.loading_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading_retry {
+    @include button;
+}
+
+/* Account page */
 .message {
     color: $color-primary;
 }
