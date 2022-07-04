@@ -1,6 +1,7 @@
+@import "./constants.scss";
 
-@mixin text_input {
-    padding: 0.2rem;
+@mixin textInput {
+    padding: .3rem;
 
     background-color: transparent;
     color: #fff;
@@ -17,7 +18,7 @@
 }
 
 @mixin button {
-    padding: 0.5rem;
+    padding: .3em;
 
     background-color: transparent;
     border: 0;

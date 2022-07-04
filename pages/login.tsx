@@ -1,9 +1,11 @@
 import type { NextPage } from 'next';
 import { FormEvent, useState } from 'react';
-import styles from '../styles/login.module.scss';
+import styles from '../styles/pages/Login.module.scss';
 import { useRouter } from 'next/router';
 import useUser from '../hooks/useUser';
 import { useEffect } from 'react';
+import LabeledTextInput from '../components/LabeledTextInput';
+import Button from '../components/Button';
 
 const Home: NextPage = () => {
     const router = useRouter();
@@ -44,12 +46,10 @@ const Home: NextPage = () => {
     return (
         <div className={styles.container} onSubmit={onLogin}>
             <form className={styles.form}>
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" />
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" />
+                <LabeledTextInput type="text" id="username" label="username" />
+                <LabeledTextInput type="password" id="password" label="password" />
                 <span className={styles.error}>{errorMessage}</span>
-                <input type="submit" value="Login" />
+                <Button type="submit">Login</Button>
             </form>
         </div>
     );

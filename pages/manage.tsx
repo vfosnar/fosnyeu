@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import TextContainer from '../components/TextContainer';
 import EditableText from '../components/EditableText';
-import styles from '../styles/manage.module.scss';
+import styles from '../styles/pages/Manage.module.scss';
 import Image from 'next/image';
 import useUser from '../hooks/useUser';
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/components/Layout.module.scss';
 import pfp from '../public/pfp.svg';
 import useUser from '../hooks/useUser';
 

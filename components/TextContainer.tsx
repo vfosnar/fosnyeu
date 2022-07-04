@@ -1,4 +1,4 @@
-import styles from '../styles/text_container.module.scss';
+import styles from '../styles/components/TextContainer.module.scss';
 
 const TextContainer = (props: {
     children: any

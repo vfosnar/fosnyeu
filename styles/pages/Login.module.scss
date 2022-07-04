@@ -1,5 +1,5 @@
-@import "./components.scss";
-@import "./constants.scss";
+@import "../mixins.scss";
+@import "../constants.scss";
 
 .container {
     display: flex;
@@ -12,16 +12,6 @@
 .form {
     display: flex;
     flex-direction: column;
-
-    input {
-        margin-top: 0.4rem;
-        margin-bottom: 1rem;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-        @include text_input;
-    }
 
     .error {
         color: $color-primary;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../styles/editable_text.module.scss';
+import styles from '../styles/components/EditableText.module.scss';
 import { AiFillEdit } from 'react-icons/ai';
 import { BiSubdirectoryRight } from 'react-icons/bi';
 
