@@ -103,11 +103,18 @@ export async function checkCredentials(username: string, password: string) {
     if(!object) return false;
 
     // Check password
-    const { searchEntries } = await client.search(object.dn, {
-        attributes: ['userPassword'],
+    const userClient = new Client({
+        url: process.env.LDAP_URL as string
     });
-    const hashed_password = searchEntries[0].userPassword as string;
-    return hashed_password === generateHash(password);
+    try {
+        await userClient.bind(object.dn, password);
+    } catch {
+        return false;
+    } finally {
+        await userClient.unbind();
+    }
+
+    return true;
 }
 
 /**
